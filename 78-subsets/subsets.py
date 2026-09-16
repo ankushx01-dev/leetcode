@@ -1,12 +1,16 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        n = len(nums)
-        total_subset = 1 << n
-        result = []
-        for num in range(0, total_subset):
-            lst = []
-            for i in range(0, n):
-                if num & (1 << i) != 0:
-                    lst.append(nums[i])
-            result.append(lst)
+        result=[]
+        subset=[]
+        def solve(index,subset):
+            if index>=len(nums):
+                result.append(subset.copy())
+                return
+            subset.append(nums[index])
+            solve(index+1,subset)
+            subset.pop()
+            solve(index+1,subset)
+        solve(0,subset)
         return result
+
+
