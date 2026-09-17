@@ -1,7 +1,9 @@
 class Solution:
     def findSubarrays(self, nums: List[int]) -> bool:
+        seen=set()
         for i in range(len(nums)-1):
-            for j in range(i+1,len(nums)-1):
-               if nums[i]+nums[i+1]==nums[j]+nums[j+1]:
-                    return True
+            curr_sum=nums[i]+nums[i+1]
+            if curr_sum in seen:
+                return True
+            seen.add(curr_sum)
         return False
